@@ -14,7 +14,7 @@ from scraper.pipeline import PowerForecastPipeline
 app = FastAPI(
     title="PowerForecast Philippines Weather & Heat Index API",
     description="Live AccuWeather Scraper and Heat Index Analytics for the Philippines",
-    version="1.0.0v"
+    version="1.0.1v"
 )
 
 app.add_middleware(
@@ -36,7 +36,7 @@ def serve_index():
     index_path = os.path.join("web", "index.html")
     if os.path.exists(index_path):
         return FileResponse(index_path)
-    return {"message": "PowerForecast API is running. Access /docs for API documentation.", "version": "1.0.0v"}
+    return {"message": "PowerForecast API is running. Access /docs for API documentation.", "version": "1.0.1v"}
 
 @app.get("/api/version")
 def get_version_info():
@@ -47,7 +47,7 @@ def get_version_info():
     else:
         changelog = []
     return {
-        "version": "1.0.0v",
+        "version": "1.0.1v",
         "app_name": "PowerForecast (Meralco Energy Intel & Smart Scheduler)",
         "primary_location": "San Jose del Monte City, Bulacan, Philippines",
         "changelog": changelog
@@ -126,7 +126,24 @@ def calculate_forecast(req: SimulationRequest):
         "active_tasks": tasks
     }
 
+def find_free_port(start_port: int = 8000) -> int:
+    import socket
+    for port in [start_port, 8080, 5000, 3000, 8888]:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            try:
+                s.bind(("127.0.0.1", port))
+                return port
+            except OSError:
+                continue
+    return start_port
+
 if __name__ == "__main__":
     import uvicorn
-    print("Starting PowerForecast Server on http://127.0.0.1:8000 ...")
-    uvicorn.run("server:app", host="127.0.0.1", port=8000, reload=True)
+    import sys
+    port = 8000
+    if len(sys.argv) > 1 and sys.argv[1].isdigit():
+        port = int(sys.argv[1])
+    else:
+        port = find_free_port(8000)
+    print(f"Starting PowerForecast Server on http://127.0.0.1:{port} ...")
+    uvicorn.run("server:app", host="127.0.0.1", port=port, reload=False)

@@ -1,5 +1,20 @@
 [
   {
+    "version": "1.0.1v",
+    "timestamp": "2026-08-21T19:40:00+08:00",
+    "description": "1.0.1v - Add socket auto-fallback and local testing suite for server and API endpoints",
+    "targets": {
+      "commit_message": "1.0.1v - Add socket auto-fallback and local testing suite for server and API endpoints",
+      "ui_display_badge": "1.0.1v",
+      "database_record": true
+    },
+    "changes": [
+      "Added dynamic free port detection in server.py (fallback to 8080/5000/3000)",
+      "Added comprehensive local testing suite in test_local.py verifying all 9 API and calculation vectors",
+      "Verified local server startup and frontend index serving"
+    ]
+  },
+  {
     "version": "1.0.0v",
     "timestamp": "2026-08-21T19:20:00+08:00",
     "description": "1.0.0v - Initial nationwide AccuWeather scraper, PowerForecast Heat Index & Appliance Energy computation engine with interactive UI and API",
