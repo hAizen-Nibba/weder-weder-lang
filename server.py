@@ -14,7 +14,7 @@ from scraper.pipeline import PowerForecastPipeline
 app = FastAPI(
     title="PowerForecast Philippines Weather & Heat Index API",
     description="Live AccuWeather Scraper and Heat Index Analytics for the Philippines",
-    version="1.0.3v"
+    version="1.0.4v"
 )
 
 app.add_middleware(
@@ -36,7 +36,7 @@ def serve_index():
     index_path = os.path.join("web", "index.html")
     if os.path.exists(index_path):
         return FileResponse(index_path)
-    return {"message": "PowerForecast API is running. Access /docs for API documentation.", "version": "1.0.3v"}
+    return {"message": "PowerForecast API is running. Access /docs for API documentation.", "version": "1.0.4v"}
 
 @app.get("/api/version")
 def get_version_info():
@@ -47,7 +47,7 @@ def get_version_info():
     else:
         changelog = []
     return {
-        "version": "1.0.3v",
+        "version": "1.0.4v",
         "app_name": "PowerForecast (Meralco Energy Intel & Smart Scheduler)",
         "primary_location": "San Jose del Monte City, Bulacan, Philippines",
         "changelog": changelog

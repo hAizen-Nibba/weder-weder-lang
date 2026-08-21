@@ -22,7 +22,7 @@ def print_banner():
 /_/    \____/|__/|__/\___/_/   /_/    \____/_/   \___/\___/\__,_/____/\__/    
                  AccuWeather Scraper & Heat Index Engine
             San Jose del Monte City, Bulacan & Whole Philippines
-                               Version: 1.0.3v
+                               Version: 1.0.4v
 ================================================================================
     """)
 

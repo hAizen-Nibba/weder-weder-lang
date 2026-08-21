@@ -1,5 +1,21 @@
 [
   {
+    "version": "1.0.4v",
+    "timestamp": "2026-08-21T20:07:00+08:00",
+    "description": "1.0.4v - Configure Vercel serverless entrypoint api/index.py, requirements.txt, and vercel.json routing for one-click deployment",
+    "targets": {
+      "commit_message": "1.0.4v - Configure Vercel serverless entrypoint api/index.py, requirements.txt, and vercel.json routing for one-click deployment",
+      "ui_display_badge": "1.0.4v",
+      "database_record": true
+    },
+    "changes": [
+      "Added api/index.py serverless entrypoint for Vercel Python runtime",
+      "Added requirements.txt with FastAPI, Uvicorn, Curl-cffi, BeautifulSoup4, and Pydantic dependencies",
+      "Configured vercel.json with clean rewrites for serverless API and static web assets",
+      "Updated UI version badge and changelog audit to 1.0.4v"
+    ]
+  },
+  {
     "version": "1.0.3v",
     "timestamp": "2026-08-21T20:04:00+08:00",
     "description": "1.0.3v - Push initial complete PowerForecast AccuWeather scraper, heat index calculation engine, and web dashboard to GitHub",
