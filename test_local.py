@@ -70,7 +70,7 @@ class LocalIntegrationTestSuite(unittest.TestCase):
         resp = self.client.get("/api/version")
         self.assertEqual(resp.status_code, 200)
         data = resp.json()
-        self.assertEqual(data.get("version"), "1.0.2v")
+        self.assertEqual(data.get("version"), "1.0.3v")
         print(f"  ✓ Version: {data.get('version')}")
 
     def test_05_api_sanjose_endpoint(self):
@@ -118,8 +118,8 @@ class LocalIntegrationTestSuite(unittest.TestCase):
         resp = self.client.get("/")
         self.assertEqual(resp.status_code, 200)
         self.assertIn("PowerForecast", resp.text)
-        self.assertIn("1.0.2v", resp.text)
-        print("  ✓ Web dashboard HTML served successfully with 1.0.2v version badge")
+        self.assertIn("1.0.3v", resp.text)
+        print("  ✓ Web dashboard HTML served successfully with 1.0.3v version badge")
 
     def test_10_api_suggest_endpoint(self):
         print("\n[TEST 10] Testing GET /api/weather/suggest?q=San ...")
