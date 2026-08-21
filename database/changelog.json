@@ -1,0 +1,21 @@
+[
+  {
+    "version": "1.0.0v",
+    "timestamp": "2026-08-21T19:20:00+08:00",
+    "description": "1.0.0v - Initial nationwide AccuWeather scraper, PowerForecast Heat Index & Appliance Energy computation engine with interactive UI and API",
+    "targets": {
+      "commit_message": "1.0.0v - Initial nationwide AccuWeather scraper, PowerForecast Heat Index & Appliance Energy computation engine with interactive UI and API",
+      "ui_display_badge": "1.0.0v",
+      "database_record": true
+    },
+    "changes": [
+      "Targeted scraping for San Jose del Monte City, Bulacan from AccuWeather with Playwright anti-detection and fast TLS engine",
+      "Nationwide expansion across all 17 regions of the Philippines (NCR, Luzon, Visayas, Mindanao)",
+      "Implemented NOAA / Rothfusz 9-term polynomial Heat Index calculation with Steadman approximation and edge humidity adjustments",
+      "Implemented PAGASA / NOAA risk levels and physiological heat stress advisories",
+      "Adaptive Inverter HVAC cooling power draw modulation model",
+      "24-Hour dynamic load curve forecasting and peak window load-shifting recommendations",
+      "Interactive CLI, FastAPI REST API, and Premium Cyber-Dark Glassmorphism Web Dashboard"
+    ]
+  }
+]

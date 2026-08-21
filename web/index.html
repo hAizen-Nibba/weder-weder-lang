@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PowerForecast | Philippines Heat Index & Smart Energy Intelligence</title>
+  <meta name="description" content="Real-time AccuWeather scraper, NOAA Rothfusz Heat Index analytics, and dynamic appliance scheduling for San Jose del Monte City and the entire Philippines.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+  <!-- Chart.js for 24-hour dynamic load curve -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="app-background"></div>
+  <div class="app-glow top-left"></div>
+  <div class="app-glow bottom-right"></div>
+
+  <!-- Header Navigation -->
+  <header class="header">
+    <div class="header-left">
+      <div class="brand-badge">
+        <div class="pulse-indicator"></div>
+        <span class="brand-title">PowerForecast</span>
+      </div>
+      <span class="brand-subtitle">Meralco Energy Intel & Nationwide Weather Engine</span>
+    </div>
+
+    <div class="header-center">
+      <div class="search-bar-container">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="citySearchInput" placeholder="Search any Philippine city or municipality (e.g. Baguio, Cebu, Marilao)..." autocomplete="off">
+        <button id="searchBtn" class="search-btn">Search</button>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <div class="ph-clock-badge">
+        <span class="clock-label">PH TIME (UTC+8)</span>
+        <span id="phTimeDisplay" class="clock-time">--:--:--</span>
+      </div>
+      <button id="refreshBtn" class="refresh-btn" title="Refresh live weather">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="refresh-icon"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+        <span>Live Scrape</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main class="main-container">
+
+    <!-- Top Focus Alert & Status Banner -->
+    <section class="status-ribbon">
+      <div class="ribbon-item">
+        <span class="ribbon-tag">PRIMARY LOCATION</span>
+        <span id="currentLocationName" class="ribbon-value">San Jose del Monte City, Bulacan</span>
+      </div>
+      <div class="ribbon-item">
+        <span class="ribbon-tag">DATA SOURCES</span>
+        <span class="ribbon-value highlight">AccuWeather Real-Time + Open-Meteo Fallback</span>
+      </div>
+      <div class="ribbon-item">
+        <span class="ribbon-tag">MATHEMATICAL MODEL</span>
+        <span class="ribbon-value">NOAA 9-Term Rothfusz Regression & PAGASA Standard</span>
+      </div>
+    </section>
+
+    <!-- Hero Section: Featured Location Card & Heat Index Gauge -->
+    <section class="hero-grid">
+      <!-- Weather Snapshot Card -->
+      <div class="card glass-card weather-card">
+        <div class="card-header">
+          <div>
+            <div class="location-badge" id="cardRegionBadge">Central Luzon (Region III) • Luzon</div>
+            <h1 class="card-title" id="cardCityTitle">San Jose del Monte City</h1>
+            <p class="card-subtitle" id="cardCoordsText">Lat 14.8137, Lon 121.0453 • Bulacan, Philippines</p>
+          </div>
+          <div class="condition-badge" id="weatherPhraseBadge">Cloudy</div>
+        </div>
+
+        <div class="temp-display-row">
+          <div class="primary-temp">
+            <span class="temp-val" id="tempVal">30</span>
+            <span class="temp-unit">°C</span>
+          </div>
+          <div class="temp-meta">
+            <div class="meta-item">
+              <span class="meta-label">Apparent RealFeel</span>
+              <span class="meta-val" id="realFeelVal">32°C</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Relative Humidity</span>
+              <span class="meta-val" id="humidityVal">79%</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Rain Probability</span>
+              <span class="meta-val" id="precipVal">75%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric-box">
+            <span class="metric-label">Wind Speed</span>
+            <span class="metric-value" id="windVal">11.0 km/h WSW</span>
+          </div>
+          <div class="metric-box">
+            <span class="metric-label">Wind Gusts</span>
+            <span class="metric-value" id="windGustVal">33.0 km/h</span>
+          </div>
+          <div class="metric-box">
+            <span class="metric-label">Dew Point</span>
+            <span class="metric-value" id="dewPointVal">26.0°C</span>
+          </div>
+          <div class="metric-box">
+            <span class="metric-label">Cloud Cover</span>
+            <span class="metric-value" id="cloudCoverVal">95%</span>
+          </div>
+          <div class="metric-box">
+            <span class="metric-label">Pressure</span>
+            <span class="metric-value" id="pressureVal">1009 mb</span>
+          </div>
+          <div class="metric-box">
+            <span class="metric-label">Visibility</span>
+            <span class="metric-value" id="visibilityVal">11.0 km</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Heat Index & Risk Level Gauge Card -->
+      <div class="card glass-card heat-index-card">
+        <div class="card-header">
+          <div>
+            <div class="tag-badge">THERMAL COMFORT & RISK</div>
+            <h2 class="card-title">Weather Heat Index (HI)</h2>
+          </div>
+          <div class="risk-badge" id="riskBadge">Extreme Caution</div>
+        </div>
+
+        <div class="hi-display-box">
+          <div class="hi-value-container">
+            <span class="hi-number" id="hiValC">37.4</span>
+            <span class="hi-unit">°C Apparent</span>
+          </div>
+          <div class="hi-fahrenheit" id="hiValF">(99.3°F)</div>
+        </div>
+
+        <!-- Visual Thermal Gradient Meter -->
+        <div class="hi-meter-container">
+          <div class="meter-bar">
+            <div class="meter-fill" id="meterFill" style="width: 65%;"></div>
+            <div class="meter-indicator" id="meterIndicator" style="left: 65%;"></div>
+          </div>
+          <div class="meter-labels">
+            <span>Normal &lt;27°</span>
+            <span>Caution 27-32°</span>
+            <span>Ext. Caution 33-41°</span>
+            <span>Danger 42-51°</span>
+            <span>Extreme &ge;52°</span>
+          </div>
+        </div>
+
+        <!-- Dynamic Advisory Box -->
+        <div class="advisory-box" id="advisoryBox">
+          <svg class="advisory-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+          <div class="advisory-text" id="advisoryText">
+            Elevated heat. Pre-cool rooms prior to afternoon peak windows. High humidity inhibits evaporative sweating.
+          </div>
+        </div>
+
+        <!-- Adaptive Inverter AC Power Impact -->
+        <div class="ac-adaptive-container">
+          <span class="ac-section-title">Dynamic Inverter AC Power Draw Modulated by Heat Index:</span>
+          <div class="ac-cards-row">
+            <div class="ac-subcard">
+              <span class="ac-name">SHARP AH-XP15YMF (1100W)</span>
+              <span class="ac-watts" id="sharpWattsVal">1155.0 W</span>
+              <span class="ac-status">Boost Cooling Active</span>
+            </div>
+            <div class="ac-subcard">
+              <span class="ac-name">jhokim aircon (820W)</span>
+              <span class="ac-watts" id="jhokimWattsVal">861.0 W</span>
+              <span class="ac-status">Elevated Duty Cycle</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 24-Hour Forecast & Hourly Dynamic Load Curve -->
+    <section class="forecast-section">
+      <div class="card glass-card">
+        <div class="card-header">
+          <div>
+            <div class="tag-badge">DYNAMIC LOAD PROFILE</div>
+            <h2 class="card-title">24-Hour Hourly Power Load & Heat Index Curve</h2>
+            <p class="card-subtitle">Peak Pricing Windows Highlighted: 11:00 AM – 4:00 PM & 6:00 PM – 9:00 PM</p>
+          </div>
+          <div class="legend-container">
+            <div class="legend-item"><span class="dot peak-dot"></span> Peak Window Alert</div>
+            <div class="legend-item"><span class="dot watts-dot"></span> Power Load (Watts)</div>
+            <div class="legend-item"><span class="dot hi-dot"></span> Heat Index (°C)</div>
+          </div>
+        </div>
+
+        <div class="chart-wrapper">
+          <canvas id="hourlyLoadChart"></canvas>
+        </div>
+
+        <!-- Hourly Forecast Mini-Carousel -->
+        <div class="hourly-cards-scroll" id="hourlyCardsScroll">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Smart Appliance Scheduler & Meralco Billing Calculator -->
+    <section class="appliance-scheduler-section">
+      <div class="card glass-card">
+        <div class="card-header">
+          <div>
+            <div class="tag-badge">MERALCO TARIFF SIMULATOR</div>
+            <h2 class="card-title">Smart Appliance Scheduling & Cost Estimator</h2>
+            <p class="card-subtitle">Adjust appliance operational hours and compute projected electricity bills dynamically.</p>
+          </div>
+          <div class="tariff-badge">
+            <span>Tariff Rate: </span>
+            <input type="number" id="tariffRateInput" value="14.82" step="0.01" class="tariff-input">
+            <span> PHP / kWh</span>
+          </div>
+        </div>
+
+        <div class="scheduler-grid">
+          <!-- Appliances Table -->
+          <div class="appliance-list-col">
+            <div class="appliance-row" data-app="sharp">
+              <div class="app-info">
+                <span class="app-title">SHARP AH-XP15YMF Inverter AC</span>
+                <span class="app-sub">Adaptive draw modulated by outdoor HI</span>
+              </div>
+              <div class="app-control">
+                <span class="app-draw" id="tableSharpWatts">1155 W</span>
+                <div class="slider-group">
+                  <label><span id="sharpHoursLabel">8.0</span> hrs/day</label>
+                  <input type="range" id="sharpHoursSlider" min="0" max="24" step="0.5" value="8" class="app-slider">
+                </div>
+              </div>
+            </div>
+
+            <div class="appliance-row" data-app="jhokim">
+              <div class="app-info">
+                <span class="app-title">jhokim aircon</span>
+                <span class="app-sub">Secondary bedroom AC inverter</span>
+              </div>
+              <div class="app-control">
+                <span class="app-draw" id="tableJhokimWatts">861 W</span>
+                <div class="slider-group">
+                  <label><span id="jhokimHoursLabel">6.0</span> hrs/day</label>
+                  <input type="range" id="jhokimHoursSlider" min="0" max="24" step="0.5" value="6" class="app-slider">
+                </div>
+              </div>
+            </div>
+
+            <div class="appliance-row" data-app="ref">
+              <div class="app-info">
+                <span class="app-title">Inverter Refrigerator</span>
+                <span class="app-sub">Continuous cooling base load</span>
+              </div>
+              <div class="app-control">
+                <span class="app-draw">160 W</span>
+                <div class="slider-group">
+                  <label><span id="refHoursLabel">24.0</span> hrs/day</label>
+                  <input type="range" id="refHoursSlider" min="0" max="24" step="1" value="24" class="app-slider">
+                </div>
+              </div>
+            </div>
+
+            <div class="appliance-row" data-app="iron">
+              <div class="app-info">
+                <span class="app-title">Electric Flat Iron (Discretionary)</span>
+                <span class="app-sub">Recommended to shift off-peak (&gt;9:00 PM)</span>
+              </div>
+              <div class="app-control">
+                <span class="app-draw">1000 W</span>
+                <div class="slider-group">
+                  <label><span id="ironHoursLabel">1.5</span> hrs/day</label>
+                  <input type="range" id="ironHoursSlider" min="0" max="8" step="0.5" value="1.5" class="app-slider">
+                </div>
+              </div>
+            </div>
+
+            <div class="appliance-row" data-app="lights">
+              <div class="app-info">
+                <span class="app-title">Lighting, WiFi Router & PCs</span>
+                <span class="app-sub">Daily home essential electronics</span>
+              </div>
+              <div class="app-control">
+                <span class="app-draw">250 W</span>
+                <div class="slider-group">
+                  <label><span id="lightsHoursLabel">12.0</span> hrs/day</label>
+                  <input type="range" id="lightsHoursSlider" min="0" max="24" step="1" value="12" class="app-slider">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Billing Summary Box -->
+          <div class="billing-summary-col">
+            <div class="summary-card">
+              <h3 class="summary-title">Projected Electricity Cost</h3>
+              
+              <div class="bill-metric">
+                <span class="bill-label">Daily Scheduled Energy:</span>
+                <span class="bill-value" id="dailyKwhDisplay">18.54 kWh</span>
+              </div>
+
+              <div class="bill-metric">
+                <span class="bill-label">Monthly Projected Energy (30 Days):</span>
+                <span class="bill-value" id="monthlyKwhDisplay">556.2 kWh</span>
+              </div>
+
+              <div class="bill-divider"></div>
+
+              <div class="bill-metric highlight">
+                <span class="bill-label">Estimated Daily Bill:</span>
+                <span class="bill-price" id="dailyCostDisplay">₱ 274.76</span>
+              </div>
+
+              <div class="bill-metric highlight-large">
+                <span class="bill-label">Estimated Monthly Bill:</span>
+                <span class="bill-price-large" id="monthlyCostDisplay">₱ 8,242.88</span>
+              </div>
+
+              <div class="smart-tips-box">
+                <div class="tip-header">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="tip-icon"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                  <span>Smart Scheduling Recommendations</span>
+                </div>
+                <ul class="tip-list">
+                  <li><strong>Peak Hours Shifting:</strong> Shift iron and heavy laundry to off-peak hours (after 9:00 PM) to reduce thermal stress.</li>
+                  <li><strong>Pre-Cooling Protocol:</strong> Pre-cool bedrooms by 10:00 AM before afternoon Heat Index exceeds 38°C.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nationwide Philippines Weather & Heat Index Explorer -->
+    <section class="nationwide-section">
+      <div class="card glass-card">
+        <div class="card-header">
+          <div>
+            <div class="tag-badge">NATIONWIDE COVERAGE</div>
+            <h2 class="card-title">Philippines Heat Index & Weather Explorer</h2>
+            <p class="card-subtitle">Select any region or click any city to load its real-time metrics and dynamic load profile.</p>
+          </div>
+          
+          <!-- Region Filter Tabs -->
+          <div class="filter-tabs">
+            <button class="tab-btn active" data-filter="all">All Philippines (46+)</button>
+            <button class="tab-btn" data-filter="NCR">NCR (Metro Manila)</button>
+            <button class="tab-btn" data-filter="Luzon">Luzon</button>
+            <button class="tab-btn" data-filter="Visayas">Visayas</button>
+            <button class="tab-btn" data-filter="Mindanao">Mindanao</button>
+          </div>
+        </div>
+
+        <!-- City Cards Grid -->
+        <div class="cities-grid" id="citiesGrid">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Sticky Bottom-Right Version Badge (Strict User Rule Compliance) -->
+  <div class="version-badge-container" id="versionBadgeContainer">
+    <div class="version-pill">
+      <span class="version-dot"></span>
+      <span class="version-text" id="uiVersionDisplay">1.0.0v</span>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
