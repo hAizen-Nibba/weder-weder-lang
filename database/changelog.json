@@ -1,5 +1,21 @@
 [
   {
+    "version": "1.0.2v",
+    "timestamp": "2026-08-21T19:54:00+08:00",
+    "description": "1.0.2v - Add real-time autocomplete search suggestions and keyboard navigation for Philippine cities and municipalities",
+    "targets": {
+      "commit_message": "1.0.2v - Add real-time autocomplete search suggestions and keyboard navigation for Philippine cities and municipalities",
+      "ui_display_badge": "1.0.2v",
+      "database_record": true
+    },
+    "changes": [
+      "Added /api/weather/suggest API endpoint with instant predefined registry matching + dynamic AccuWeather autocomplete",
+      "Added interactive glassmorphism dropdown suggestions menu in frontend UI",
+      "Added keyboard navigation (ArrowDown, ArrowUp, Enter, Escape) and click selection",
+      "Updated UI version tag in bottom-right corner to 1.0.2v"
+    ]
+  },
+  {
     "version": "1.0.1v",
     "timestamp": "2026-08-21T19:40:00+08:00",
     "description": "1.0.1v - Add socket auto-fallback and local testing suite for server and API endpoints",

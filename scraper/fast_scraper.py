@@ -25,6 +25,7 @@ class AccuWeatherFastScraper:
         target_url = location_info.get("accuweather_url", "")
         # Convert to current-weather URL for deep metrics
         current_url = target_url.replace("/weather-today/", "/current-weather/").replace("/weather-forecast/", "/current-weather/")
+        hourly_url = target_url.replace("/weather-today/", "/hourly-weather-forecast/").replace("/current-weather/", "/hourly-weather-forecast/").replace("/weather-forecast/", "/hourly-weather-forecast/")
         
         session = self._get_session()
         result = {
@@ -36,6 +37,7 @@ class AccuWeatherFastScraper:
             "coordinates": location_info.get("coordinates"),
             "source_url": current_url,
             "weather_snapshot": {},
+            "hourly_forecast": [],
             "raw_details": {}
         }
 
@@ -54,7 +56,67 @@ class AccuWeatherFastScraper:
         except Exception as e:
             print(f"[FastScraper] Error fetching {location_info.get('name')}: {e}")
 
+        # Try scraping live AccuWeather hourly forecast
+        try:
+            r_hourly = session.get(hourly_url, headers={"Referer": "https://www.accuweather.com/"}, timeout=self.timeout)
+            if r_hourly.status_code == 200:
+                result["hourly_forecast"] = self._parse_hourly(r_hourly.text)
+        except Exception as e:
+            print(f"[FastScraper] Hourly fetch exception for {location_info.get('name')}: {e}")
+
         return result
+
+    def _parse_hourly(self, html: str) -> List[Dict[str, Any]]:
+        soup = BeautifulSoup(html, "lxml")
+        hourly = []
+        for card in soup.select(".hourly-card-nfl, .hourly-wrapper .accordion-item, .hourly-list-item"):
+            time_elem = card.select_one(".date, .time, h2")
+            temp_elem = card.select_one(".temp, .metric")
+            rf_elem = card.select_one(".real-feel, .realfeel")
+            phrase_elem = card.select_one(".phrase, .cond")
+            precip_elem = card.select_one(".precip")
+
+            if time_elem and temp_elem:
+                time_str = time_elem.get_text(strip=True)
+                temp_str = temp_elem.get_text(strip=True)
+                m_temp = re.search(r"(-?\d+)", temp_str)
+                temp_val = float(m_temp.group(1)) if m_temp else 30.0
+
+                rf_val = None
+                if rf_elem:
+                    m_rf = re.search(r"RealFeel.*?(\d+)", rf_elem.get_text())
+                    if m_rf:
+                        rf_val = float(m_rf.group(1))
+
+                precip_val = None
+                if precip_elem:
+                    m_p = re.search(r"(\d+)%", precip_elem.get_text())
+                    if m_p:
+                        precip_val = int(m_p.group(1))
+
+                phrase_val = phrase_elem.get_text(strip=True) if phrase_elem else "Cloudy"
+
+                hour_24 = 12
+                try:
+                    if "PM" in time_str:
+                        h = int(re.search(r"(\d+)", time_str).group(1))
+                        hour_24 = h + 12 if h != 12 else 12
+                    elif "AM" in time_str:
+                        h = int(re.search(r"(\d+)", time_str).group(1))
+                        hour_24 = h if h != 12 else 0
+                except:
+                    pass
+
+                hourly.append({
+                    "hour": time_str,
+                    "hour_24": hour_24,
+                    "temp_c": temp_val,
+                    "humidity_pct": 75.0,
+                    "real_feel_c": rf_val or temp_val,
+                    "precip_prob_pct": precip_val if precip_val is not None else 20,
+                    "phrase": phrase_val
+                })
+        return hourly
 
     def scrape_batch(self, locations: List[Dict[str, Any]], max_workers: int = 8) -> List[Dict[str, Any]]:
         """

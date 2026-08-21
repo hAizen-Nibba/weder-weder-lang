@@ -14,7 +14,7 @@ from scraper.pipeline import PowerForecastPipeline
 app = FastAPI(
     title="PowerForecast Philippines Weather & Heat Index API",
     description="Live AccuWeather Scraper and Heat Index Analytics for the Philippines",
-    version="1.0.1v"
+    version="1.0.2v"
 )
 
 app.add_middleware(
@@ -36,7 +36,7 @@ def serve_index():
     index_path = os.path.join("web", "index.html")
     if os.path.exists(index_path):
         return FileResponse(index_path)
-    return {"message": "PowerForecast API is running. Access /docs for API documentation.", "version": "1.0.1v"}
+    return {"message": "PowerForecast API is running. Access /docs for API documentation.", "version": "1.0.2v"}
 
 @app.get("/api/version")
 def get_version_info():
@@ -47,11 +47,50 @@ def get_version_info():
     else:
         changelog = []
     return {
-        "version": "1.0.1v",
+        "version": "1.0.2v",
         "app_name": "PowerForecast (Meralco Energy Intel & Smart Scheduler)",
         "primary_location": "San Jose del Monte City, Bulacan, Philippines",
         "changelog": changelog
     }
+
+@app.get("/api/weather/suggest")
+def get_search_suggestions(q: str = Query(..., min_length=1, description="Query prefix")):
+    q_clean = q.strip().lower()
+    results = []
+    seen_names = set()
+
+    # 1. Match from predefined Philippine locations
+    predefined = PhilippineLocationResolver.search_predefined(q_clean)
+    for p in predefined:
+        if p["name"] not in seen_names:
+            seen_names.add(p["name"])
+            results.append({
+                "name": p["name"],
+                "province": p["province"],
+                "region": p.get("region", "Philippines"),
+                "island_group": p.get("island_group", "Philippines"),
+                "id": p["id"]
+            })
+
+    # 2. Match from AccuWeather dynamic autocomplete if query is 2+ chars
+    if len(q_clean) >= 2 and len(results) < 8:
+        try:
+            live = PhilippineLocationResolver.query_accuweather_autocomplete(q_clean)
+            for item in live:
+                name = item.get("name")
+                if name and name not in seen_names:
+                    seen_names.add(name)
+                    results.append({
+                        "name": name,
+                        "province": item.get("province", "Philippines"),
+                        "region": item.get("region", "Philippines"),
+                        "island_group": item.get("island_group", "Philippines"),
+                        "id": item.get("id")
+                    })
+        except Exception as e:
+            print(f"[Suggest] Autocomplete lookup exception: {e}")
+
+    return results[:8]
 
 @app.get("/api/weather/sanjose")
 def get_san_jose_weather(refresh: bool = False):

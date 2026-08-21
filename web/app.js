@@ -375,7 +375,7 @@ function updateApplianceBilling() {
   document.getElementById("monthlyCostDisplay").textContent = `₱ ${monthlyCost.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
 
-// 9. Event Listeners
+// 9. Event Listeners & Autocomplete Search Suggestions
 function initEventListeners() {
   // Live Scrape Refresh button
   const refreshBtn = document.getElementById("refreshBtn");
@@ -386,14 +386,20 @@ function initEventListeners() {
     });
   }
 
-  // City Search
+  // City Search & Autocomplete Dropdown
   const searchInput = document.getElementById("citySearchInput");
   const searchBtn = document.getElementById("searchBtn");
+  const dropdown = document.getElementById("searchSuggestionsDropdown");
 
-  async function performSearch() {
-    const query = searchInput.value.trim();
+  let debounceTimer = null;
+  let activeIndex = -1;
+  let currentSuggestions = [];
+
+  async function performSearch(queryOverride = null) {
+    const query = (queryOverride || searchInput.value).trim();
     if (!query) return;
 
+    hideDropdown();
     searchBtn.textContent = "Searching...";
     try {
       const resp = await fetch(`/api/weather/search?q=${encodeURIComponent(query)}`);
@@ -414,12 +420,137 @@ function initEventListeners() {
     }
   }
 
-  if (searchBtn) searchBtn.addEventListener("click", performSearch);
+  function hideDropdown() {
+    if (dropdown) {
+      dropdown.classList.remove("open");
+      dropdown.innerHTML = "";
+    }
+    activeIndex = -1;
+    currentSuggestions = [];
+  }
+
+  function renderSuggestions(items) {
+    if (!dropdown) return;
+    currentSuggestions = items;
+    activeIndex = -1;
+
+    if (!items || items.length === 0) {
+      hideDropdown();
+      return;
+    }
+
+    dropdown.innerHTML = "";
+    items.forEach((item, idx) => {
+      const div = document.createElement("div");
+      div.className = "suggestion-item";
+      div.setAttribute("data-index", idx);
+      div.innerHTML = `
+        <div class="suggestion-left">
+          <span class="suggestion-title">${item.name}</span>
+          <span class="suggestion-sub">${item.province} • ${item.island_group || "Philippines"}</span>
+        </div>
+        <span class="suggestion-badge">${item.region.split("(")[0].trim()}</span>
+      `;
+
+      div.addEventListener("click", () => {
+        searchInput.value = item.name;
+        performSearch(item.name);
+      });
+
+      dropdown.appendChild(div);
+    });
+
+    dropdown.classList.add("open");
+  }
+
+  async function fetchSuggestions(query) {
+    const q = query.trim();
+    if (q.length < 1) {
+      hideDropdown();
+      return;
+    }
+
+    try {
+      const resp = await fetch(`/api/weather/suggest?q=${encodeURIComponent(q)}`);
+      if (resp.ok) {
+        const items = await resp.json();
+        renderSuggestions(items);
+      }
+    } catch (err) {
+      console.warn("Suggestions error:", err);
+    }
+  }
+
   if (searchInput) {
-    searchInput.addEventListener("keypress", (e) => {
-      if (e.key === "Enter") performSearch();
+    // Input listener with debounce
+    searchInput.addEventListener("input", (e) => {
+      clearTimeout(debounceTimer);
+      const val = e.target.value;
+      debounceTimer = setTimeout(() => {
+        fetchSuggestions(val);
+      }, 250);
+    });
+
+    // Keyboard navigation (Arrow keys, Enter, Escape)
+    searchInput.addEventListener("keydown", (e) => {
+      const items = dropdown ? dropdown.querySelectorAll(".suggestion-item") : [];
+
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        if (items.length > 0) {
+          activeIndex = (activeIndex + 1) % items.length;
+          updateActiveItem(items);
+        }
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        if (items.length > 0) {
+          activeIndex = (activeIndex - 1 + items.length) % items.length;
+          updateActiveItem(items);
+        }
+      } else if (e.key === "Enter") {
+        e.preventDefault();
+        if (activeIndex >= 0 && activeIndex < currentSuggestions.length) {
+          const chosen = currentSuggestions[activeIndex];
+          searchInput.value = chosen.name;
+          performSearch(chosen.name);
+        } else {
+          performSearch();
+        }
+      } else if (e.key === "Escape") {
+        hideDropdown();
+      }
+    });
+
+    // Focus listener
+    searchInput.addEventListener("focus", () => {
+      if (searchInput.value.trim().length >= 1) {
+        fetchSuggestions(searchInput.value);
+      }
     });
   }
+
+  function updateActiveItem(items) {
+    items.forEach((it, idx) => {
+      if (idx === activeIndex) {
+        it.classList.add("active");
+        it.scrollIntoView({ block: "nearest" });
+        if (currentSuggestions[idx]) {
+          searchInput.value = currentSuggestions[idx].name;
+        }
+      } else {
+        it.classList.remove("active");
+      }
+    });
+  }
+
+  // Click outside to close dropdown
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".search-wrapper")) {
+      hideDropdown();
+    }
+  });
+
+  if (searchBtn) searchBtn.addEventListener("click", () => performSearch());
 
   // Filter Tabs
   document.querySelectorAll(".tab-btn").forEach((btn) => {

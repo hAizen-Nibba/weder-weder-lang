@@ -35,13 +35,16 @@ class PowerForecastPipeline:
         hum_pct = snapshot.get("humidity_pct")
         hourly_forecast = []
 
-        # 2. Validate and enrich with Open-Meteo fallback if needed or to get complete 24-hour hourly series
+        # 2. Extract live AccuWeather hourly if available
+        hourly_forecast = scraped.get("hourly_forecast", [])
+
+        # 3. Validate and enrich with Open-Meteo fallback for remaining 24 hours or if missing
         is_baguio = "baguio" in str(location_info.get("id", "")).lower()
         min_valid_temp = 14.0 if is_baguio else 18.0
         is_invalid_temp = temp_c is None or temp_c < min_valid_temp or temp_c > 48.0
         is_invalid_hum = hum_pct is None or hum_pct < 20.0 or hum_pct > 100.0
 
-        if include_hourly or is_invalid_temp or is_invalid_hum:
+        if len(hourly_forecast) < 24 or is_invalid_temp or is_invalid_hum:
             enriched = OpenMeteoFallbackEngine.fetch_weather_and_hourly(coords["lat"], coords["lon"])
             if enriched:
                 if is_invalid_temp:
@@ -59,13 +62,41 @@ class PowerForecastPipeline:
                 if snapshot.get("precipitation_prob_pct") is None:
                     snapshot["precipitation_prob_pct"] = enriched.get("precipitation_prob_pct")
                 
-                hourly_forecast = enriched.get("hourly_forecast", [])
+                om_hourly = enriched.get("hourly_forecast", [])
+                
+                if not hourly_forecast:
+                    # Calibrate Open-Meteo curve to match live ground reading at current hour
+                    delta_temp = (temp_c - om_hourly[0]["temp_c"]) if om_hourly and temp_c else 0.0
+                    calibrated_hourly = []
+                    for h in om_hourly:
+                        calibrated_hourly.append({
+                            **h,
+                            "temp_c": round(h["temp_c"] + delta_temp, 1),
+                            "humidity_pct": h["humidity_pct"]
+                        })
+                    hourly_forecast = calibrated_hourly
+                else:
+                    # Merge AccuWeather live hours with remaining Open-Meteo hours
+                    existing_hours = {h["hour_24"] for h in hourly_forecast}
+                    for h in om_hourly:
+                        if h["hour_24"] not in existing_hours and len(hourly_forecast) < 24:
+                            hourly_forecast.append(h)
+                            existing_hours.add(h["hour_24"])
 
         # Default fallbacks if both third parties had partial drops
         temp_c = float(temp_c) if temp_c is not None else 31.5
         hum_pct = float(hum_pct) if hum_pct is not None else 72.0
         snapshot["temperature_c"] = round(temp_c, 1)
         snapshot["humidity_pct"] = round(hum_pct, 1)
+
+        # Synchronize first hourly entry with current live snapshot
+        if hourly_forecast and len(hourly_forecast) > 0:
+            hourly_forecast[0]["temp_c"] = snapshot["temperature_c"]
+            hourly_forecast[0]["humidity_pct"] = snapshot["humidity_pct"]
+            if snapshot.get("real_feel_c"):
+                hourly_forecast[0]["real_feel_c"] = snapshot["real_feel_c"]
+            if snapshot.get("precipitation_prob_pct") is not None:
+                hourly_forecast[0]["precip_prob_pct"] = snapshot["precipitation_prob_pct"]
 
         # 3. Calculate NOAA Rothfusz Heat Index
         hi_eval = PowerForecastEngine.calculate_heat_index(temp_c, hum_pct)

@@ -9,10 +9,10 @@
     "lon": 121.05
   },
   "source_url": "https://www.accuweather.com/en/ph/san-jose-del-monte-city/3-262458_1_al/weather-today/3-262458_1_al",
-  "timestamp": "2026-08-21T19:24:39.651826",
+  "timestamp": "2026-08-21T19:48:15.759913",
   "weather_snapshot": {
     "temperature_c": 30.0,
-    "humidity_pct": 79.0,
+    "humidity_pct": 78.0,
     "real_feel_c": 32.0,
     "phrase": "Cloudy",
     "dew_point_c": 26.0,
@@ -28,9 +28,9 @@
   },
   "heat_index_evaluation": {
     "ambient_temp_c": 30.0,
-    "relative_humidity_pct": 79.0,
-    "heat_index_c": 37.39,
-    "heat_index_f": 99.29,
+    "relative_humidity_pct": 78.0,
+    "heat_index_c": 37.11,
+    "heat_index_f": 98.79,
     "risk_level": "Extreme Caution",
     "badge": "warning",
     "advisory": "Elevated heat. Pre-cool rooms prior to afternoon peak windows.",
@@ -39,6 +39,42 @@
   },
   "hourly_forecast": [
     {
+      "hour": "8 PM",
+      "hour_24": 20,
+      "temp_c": 30.0,
+      "humidity_pct": 78.0,
+      "real_feel_c": 32.0,
+      "precip_prob_pct": 75,
+      "phrase": "Cloudy"
+    },
+    {
+      "hour": "9 PM",
+      "hour_24": 21,
+      "temp_c": 28.0,
+      "humidity_pct": 75.0,
+      "real_feel_c": 28.0,
+      "precip_prob_pct": 51,
+      "phrase": "Showers"
+    },
+    {
+      "hour": "10 PM",
+      "hour_24": 22,
+      "temp_c": 27.0,
+      "humidity_pct": 75.0,
+      "real_feel_c": 27.0,
+      "precip_prob_pct": 40,
+      "phrase": "Cloudy"
+    },
+    {
+      "hour": "11 PM",
+      "hour_24": 23,
+      "temp_c": 27.0,
+      "humidity_pct": 75.0,
+      "real_feel_c": 27.0,
+      "precip_prob_pct": 34,
+      "phrase": "Cloudy"
+    },
+    {
       "hour": "7 PM",
       "hour_24": 19,
       "time_iso": "2026-08-21T19:00",
@@ -46,46 +82,6 @@
       "humidity_pct": 85,
       "real_feel_c": 32.4,
       "precip_prob_pct": 0,
-      "phrase": "Humid/Overcast"
-    },
-    {
-      "hour": "8 PM",
-      "hour_24": 20,
-      "time_iso": "2026-08-21T20:00",
-      "temp_c": 26.5,
-      "humidity_pct": 87,
-      "real_feel_c": 32.1,
-      "precip_prob_pct": 2,
-      "phrase": "Humid/Overcast"
-    },
-    {
-      "hour": "9 PM",
-      "hour_24": 21,
-      "time_iso": "2026-08-21T21:00",
-      "temp_c": 26.6,
-      "humidity_pct": 87,
-      "real_feel_c": 32.6,
-      "precip_prob_pct": 5,
-      "phrase": "Humid/Overcast"
-    },
-    {
-      "hour": "10 PM",
-      "hour_24": 22,
-      "time_iso": "2026-08-21T22:00",
-      "temp_c": 26.1,
-      "humidity_pct": 88,
-      "real_feel_c": 31.8,
-      "precip_prob_pct": 9,
-      "phrase": "Humid/Overcast"
-    },
-    {
-      "hour": "11 PM",
-      "hour_24": 23,
-      "time_iso": "2026-08-21T23:00",
-      "temp_c": 25.6,
-      "humidity_pct": 90,
-      "real_feel_c": 31.0,
-      "precip_prob_pct": 12,
       "phrase": "Humid/Overcast"
     },
     {
@@ -281,6 +277,94 @@
   ],
   "load_profile_curve": [
     {
+      "hour": "8 PM",
+      "hour_24": 20,
+      "temp_c": 30.0,
+      "humidity_pct": 78.0,
+      "heat_index_c": 37.11,
+      "heat_index_f": 98.79,
+      "risk_level": "Extreme Caution",
+      "badge": "warning",
+      "is_peak_window": true,
+      "total_load_watts": 1505.0,
+      "appliances": [
+        {
+          "name": "SHARP AH-XP15YMF Inverter AC",
+          "watts": 1155.0
+        },
+        {
+          "name": "Base Home Load (Ref, Lights, Router)",
+          "watts": 350.0
+        }
+      ]
+    },
+    {
+      "hour": "9 PM",
+      "hour_24": 21,
+      "temp_c": 28.0,
+      "humidity_pct": 75.0,
+      "heat_index_c": 31.36,
+      "heat_index_f": 88.44,
+      "risk_level": "Caution",
+      "badge": "caution",
+      "is_peak_window": false,
+      "total_load_watts": 1194.8,
+      "appliances": [
+        {
+          "name": "SHARP AH-XP15YMF Inverter AC",
+          "watts": 844.8
+        },
+        {
+          "name": "Base Home Load (Ref, Lights, Router)",
+          "watts": 350.0
+        }
+      ]
+    },
+    {
+      "hour": "10 PM",
+      "hour_24": 22,
+      "temp_c": 27.0,
+      "humidity_pct": 75.0,
+      "heat_index_c": 29.28,
+      "heat_index_f": 84.71,
+      "risk_level": "Caution",
+      "badge": "caution",
+      "is_peak_window": false,
+      "total_load_watts": 1080.4,
+      "appliances": [
+        {
+          "name": "SHARP AH-XP15YMF Inverter AC",
+          "watts": 730.4
+        },
+        {
+          "name": "Base Home Load (Ref, Lights, Router)",
+          "watts": 350.0
+        }
+      ]
+    },
+    {
+      "hour": "11 PM",
+      "hour_24": 23,
+      "temp_c": 27.0,
+      "humidity_pct": 75.0,
+      "heat_index_c": 29.28,
+      "heat_index_f": 84.71,
+      "risk_level": "Caution",
+      "badge": "caution",
+      "is_peak_window": false,
+      "total_load_watts": 1080.4,
+      "appliances": [
+        {
+          "name": "SHARP AH-XP15YMF Inverter AC",
+          "watts": 730.4
+        },
+        {
+          "name": "Base Home Load (Ref, Lights, Router)",
+          "watts": 350.0
+        }
+      ]
+    },
+    {
       "hour": "7 PM",
       "hour_24": 19,
       "temp_c": 26.9,
@@ -295,94 +379,6 @@
         {
           "name": "SHARP AH-XP15YMF Inverter AC",
           "watts": 768.35
-        },
-        {
-          "name": "Base Home Load (Ref, Lights, Router)",
-          "watts": 350.0
-        }
-      ]
-    },
-    {
-      "hour": "8 PM",
-      "hour_24": 20,
-      "temp_c": 26.5,
-      "humidity_pct": 87.0,
-      "heat_index_c": 29.14,
-      "heat_index_f": 84.45,
-      "risk_level": "Caution",
-      "badge": "caution",
-      "is_peak_window": true,
-      "total_load_watts": 1072.7,
-      "appliances": [
-        {
-          "name": "SHARP AH-XP15YMF Inverter AC",
-          "watts": 722.7
-        },
-        {
-          "name": "Base Home Load (Ref, Lights, Router)",
-          "watts": 350.0
-        }
-      ]
-    },
-    {
-      "hour": "9 PM",
-      "hour_24": 21,
-      "temp_c": 26.6,
-      "humidity_pct": 87.0,
-      "heat_index_c": 29.39,
-      "heat_index_f": 84.9,
-      "risk_level": "Caution",
-      "badge": "caution",
-      "is_peak_window": false,
-      "total_load_watts": 1086.5,
-      "appliances": [
-        {
-          "name": "SHARP AH-XP15YMF Inverter AC",
-          "watts": 736.45
-        },
-        {
-          "name": "Base Home Load (Ref, Lights, Router)",
-          "watts": 350.0
-        }
-      ]
-    },
-    {
-      "hour": "10 PM",
-      "hour_24": 22,
-      "temp_c": 26.1,
-      "humidity_pct": 88.0,
-      "heat_index_c": 27.06,
-      "heat_index_f": 80.71,
-      "risk_level": "Caution",
-      "badge": "caution",
-      "is_peak_window": false,
-      "total_load_watts": 958.3,
-      "appliances": [
-        {
-          "name": "SHARP AH-XP15YMF Inverter AC",
-          "watts": 608.3
-        },
-        {
-          "name": "Base Home Load (Ref, Lights, Router)",
-          "watts": 350.0
-        }
-      ]
-    },
-    {
-      "hour": "11 PM",
-      "hour_24": 23,
-      "temp_c": 25.6,
-      "humidity_pct": 90.0,
-      "heat_index_c": 26.57,
-      "heat_index_f": 79.82,
-      "risk_level": "Normal / Safe",
-      "badge": "safe",
-      "is_peak_window": false,
-      "total_load_watts": 931.4,
-      "appliances": [
-        {
-          "name": "SHARP AH-XP15YMF Inverter AC",
-          "watts": 581.35
         },
         {
           "name": "Base Home Load (Ref, Lights, Router)",

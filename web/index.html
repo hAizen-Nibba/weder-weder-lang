@@ -28,10 +28,13 @@
     </div>
 
     <div class="header-center">
-      <div class="search-bar-container">
-        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-        <input type="text" id="citySearchInput" placeholder="Search any Philippine city or municipality (e.g. Baguio, Cebu, Marilao)..." autocomplete="off">
-        <button id="searchBtn" class="search-btn">Search</button>
+      <div class="search-wrapper">
+        <div class="search-bar-container">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" id="citySearchInput" placeholder="Search any Philippine city or municipality (e.g. Baguio, Cebu, Marilao)..." autocomplete="off">
+          <button id="searchBtn" class="search-btn">Search</button>
+        </div>
+        <div class="search-suggestions-dropdown" id="searchSuggestionsDropdown"></div>
       </div>
     </div>
 
@@ -380,7 +383,7 @@
   <div class="version-badge-container" id="versionBadgeContainer">
     <div class="version-pill">
       <span class="version-dot"></span>
-      <span class="version-text" id="uiVersionDisplay">1.0.1v</span>
+      <span class="version-text" id="uiVersionDisplay">1.0.2v</span>
     </div>
   </div>
 

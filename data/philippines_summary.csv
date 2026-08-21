@@ -1,47 +1,47 @@
 Location,Province,Region,Island Group,Air Temp (°C),Humidity (%),RealFeel (°C),Heat Index (°C),Heat Index (°F),Risk Level,Adaptive AC 1100W (Watts),Precipitation Prob (%),Timestamp
-San Jose del Monte City,Bulacan,Central Luzon (Region III),Luzon,30.0,79.0,32.0,37.39,99.29,Extreme Caution,1155.0,75,2026-08-21T19:24:40.850979
-Malolos City,Bulacan,Central Luzon (Region III),Luzon,30.0,78.0,31.0,37.11,98.79,Extreme Caution,1155.0,25,2026-08-21T19:24:41.522954
-Angeles City,Pampanga,Central Luzon (Region III),Luzon,29.0,74.0,29.0,33.49,92.29,Extreme Caution,961.95,55,2026-08-21T19:24:42.059395
-San Fernando City,Pampanga,Central Luzon (Region III),Luzon,27.0,72.0,25.0,29.02,84.24,Caution,716.1,25,2026-08-21T19:24:42.626052
-Cabanatuan City,Nueva Ecija,Central Luzon (Region III),Luzon,28.0,84.0,31.0,32.73,90.92,Caution,920.15,55,2026-08-21T19:24:43.301849
-Tarlac City,Tarlac,Central Luzon (Region III),Luzon,26.0,68.0,30.0,26.43,79.58,Normal / Safe,573.65,91,2026-08-21T19:24:43.877911
-Olongapo City,Zambales,Central Luzon (Region III),Luzon,25.0,52.0,28.0,24.91,76.84,Normal / Safe,490.05,89,2026-08-21T19:24:44.466723
-City of Manila,Metro Manila,National Capital Region (NCR),Luzon,29.0,81.0,32.0,34.96,94.93,Extreme Caution,1042.8,75,2026-08-21T19:24:45.667556
-Quezon City,Metro Manila,National Capital Region (NCR),Luzon,27.0,82.0,27.0,29.93,85.87,Caution,766.15,55,2026-08-21T19:24:47.181696
-Makati City,Metro Manila,National Capital Region (NCR),Luzon,30.0,79.0,32.0,37.39,99.29,Extreme Caution,1155.0,75,2026-08-21T19:24:47.762958
-Taguig City (BGC),Metro Manila,National Capital Region (NCR),Luzon,28.0,83.0,30.0,32.57,90.63,Caution,911.35,25,2026-08-21T19:24:48.357620
-Pasig City,Metro Manila,National Capital Region (NCR),Luzon,30.0,78.0,30.0,37.11,98.79,Extreme Caution,1155.0,21,2026-08-21T19:24:48.914939
-Caloocan City,Metro Manila,National Capital Region (NCR),Luzon,29.0,88.0,32.0,36.68,98.02,Extreme Caution,1137.4,87,2026-08-21T19:24:49.492922
-Parañaque City,Metro Manila,National Capital Region (NCR),Luzon,27.0,82.0,27.0,29.93,85.87,Caution,766.15,55,2026-08-21T19:24:50.051086
-Pasay City,Metro Manila,National Capital Region (NCR),Luzon,28.0,83.0,30.0,32.57,90.63,Caution,911.35,25,2026-08-21T19:24:50.618100
-Antipolo City,Rizal,CALABARZON (Region IV-A),Luzon,21.0,82.0,38.0,21.3,70.33,Normal / Safe,440.0,19,2026-08-21T19:24:51.353793
-Calamba City,Laguna,CALABARZON (Region IV-A),Luzon,22.0,90.0,42.0,22.61,72.69,Normal / Safe,440.0,55,2026-08-21T19:24:51.986957
-Santa Rosa City,Laguna,CALABARZON (Region IV-A),Luzon,23.0,87.0,41.0,23.63,74.53,Normal / Safe,440.0,25,2026-08-21T19:24:52.667557
-Batangas City,Batangas,CALABARZON (Region IV-A),Luzon,29.0,82.0,31.0,35.18,95.33,Extreme Caution,1054.9,25,2026-08-21T19:24:53.220805
-Lipa City,Batangas,CALABARZON (Region IV-A),Luzon,19.0,100.0,17.0,19.57,67.22,Normal / Safe,440.0,68,2026-08-21T19:24:53.904945
-Tagaytay City,Cavite,CALABARZON (Region IV-A),Luzon,28.0,75.0,29.0,31.36,88.44,Caution,844.8,20,2026-08-21T19:24:54.443795
-Dasmariñas City,Cavite,CALABARZON (Region IV-A),Luzon,27.0,81.0,28.0,29.83,85.7,Caution,760.65,25,2026-08-21T19:24:55.079159
-Lucena City,Quezon,CALABARZON (Region IV-A),Luzon,22.0,100.0,41.0,22.87,73.16,Normal / Safe,440.0,97,2026-08-21T19:24:55.732806
-Baguio City,Benguet,Cordillera Administrative Region (CAR),Luzon,28.0,82.0,32.0,32.41,90.34,Caution,902.55,25,2026-08-21T19:24:57.206741
-Laoag City,Ilocos Norte,Ilocos Region (Region I),Luzon,26.0,90.0,27.0,27.01,80.61,Caution,605.55,25,2026-08-21T19:24:57.758990
-Vigan City,Ilocos Sur,Ilocos Region (Region I),Luzon,17.0,97.0,17.0,17.29,63.12,Normal / Safe,440.0,25,2026-08-21T19:24:58.341742
-Dagupan City,Pangasinan,Ilocos Region (Region I),Luzon,30.0,78.0,29.0,37.11,98.79,Extreme Caution,1155.0,96,2026-08-21T19:24:58.985836
-Tuguegarao City,Cagayan,Cagayan Valley (Region II),Luzon,28.0,83.0,31.0,32.57,90.63,Caution,911.35,17,2026-08-21T19:24:59.542569
-Legazpi City,Albay,Bicol Region (Region V),Luzon,4.7,100.0,19.0,3.84,38.91,Normal / Safe,440.0,55,2026-08-21T19:25:00.941699
-Naga City,Camarines Sur,Bicol Region (Region V),Luzon,13.4,65.0,33.0,12.49,54.49,Normal / Safe,440.0,8,2026-08-21T19:25:02.393721
-Puerto Princesa City,Palawan,MIMAROPA (Region IV-B),Luzon,27.0,87.0,29.0,30.57,87.02,Caution,801.35,15,2026-08-21T19:25:03.005655
-Cebu City,Cebu,Central Visayas (Region VII),Visayas,29.0,86.0,31.0,36.13,97.04,Extreme Caution,1107.15,22,2026-08-21T19:25:04.195655
-Mandaue City,Cebu,Central Visayas (Region VII),Visayas,26.0,87.0,24.0,26.93,80.47,Normal / Safe,601.15,90,2026-08-21T19:25:04.762886
-Iloilo City,Iloilo,Western Visayas (Region VI),Visayas,29.0,77.0,33.0,34.1,93.39,Extreme Caution,995.5,25,2026-08-21T19:25:06.156642
-Bacolod City,Negros Occidental,Negros Island Region,Visayas,27.0,82.0,27.0,29.93,85.87,Caution,766.15,55,2026-08-21T19:25:06.733533
-Dumaguete City,Negros Oriental,Negros Island Region,Visayas,0.8,28.0,22.0,-2.33,27.8,Normal / Safe,440.0,0,2026-08-21T19:25:08.131773
-Tacloban City,Leyte,Eastern Visayas (Region VIII),Visayas,19.0,63.0,24.0,18.6,65.48,Normal / Safe,440.0,55,2026-08-21T19:25:08.720880
-Tagbilaran City,Bohol,Central Visayas (Region VII),Visayas,25.0,79.0,23.0,25.62,78.11,Normal / Safe,529.1,25,2026-08-21T19:25:09.293593
-Roxas City,Capiz,Western Visayas (Region VI),Visayas,2.2,61.0,11.0,0.07,32.12,Normal / Safe,440.0,25,2026-08-21T19:25:10.679086
-Davao City,Davao del Sur,Davao Region (Region XI),Mindanao,27.0,81.0,28.0,29.83,85.7,Caution,760.65,65,2026-08-21T19:25:12.071501
-Cagayan de Oro City,Misamis Oriental,Northern Mindanao (Region X),Mindanao,26.0,64.0,28.0,26.33,79.39,Normal / Safe,568.15,81,2026-08-21T19:25:13.563508
-Zamboanga City,Zamboanga del Sur,Zamboanga Peninsula (Region IX),Mindanao,27.0,36.0,28.0,26.67,80.01,Normal / Safe,586.85,92,2026-08-21T19:25:14.137428
-General Santos City,South Cotabato,SOCCSKSARGEN (Region XII),Mindanao,29.0,81.0,32.0,34.96,94.93,Extreme Caution,1042.8,16,2026-08-21T19:25:14.708736
-Butuan City,Agusan del Norte,Caraga (Region XIII),Mindanao,16.0,88.0,25.0,15.95,60.72,Normal / Safe,440.0,0,2026-08-21T19:25:15.277660
-Iligan City,Lanao del Norte,Northern Mindanao (Region X),Mindanao,24.0,65.0,27.0,24.15,75.48,Normal / Safe,448.25,85,2026-08-21T19:25:15.986664
-Cotabato City,Maguindanao del Norte,BARMM,Mindanao,31.0,73.0,33.0,38.53,101.35,Extreme Caution,1155.0,25,2026-08-21T19:25:16.557936
+San Jose del Monte City,Bulacan,Central Luzon (Region III),Luzon,30.0,78.0,32.0,37.11,98.79,Extreme Caution,1155.0,75,2026-08-21T19:48:17.424169
+Malolos City,Bulacan,Central Luzon (Region III),Luzon,30.0,77.0,31.0,36.83,98.3,Extreme Caution,1145.65,25,2026-08-21T19:48:19.587724
+Angeles City,Pampanga,Central Luzon (Region III),Luzon,29.0,75.0,29.0,33.69,92.65,Extreme Caution,972.95,55,2026-08-21T19:48:21.892576
+San Fernando City,Pampanga,Central Luzon (Region III),Luzon,27.0,71.0,25.0,28.94,84.09,Caution,711.7,25,2026-08-21T19:48:24.158859
+Cabanatuan City,Nueva Ecija,Central Luzon (Region III),Luzon,28.0,84.0,31.0,32.73,90.92,Caution,920.15,55,2026-08-21T19:48:26.457518
+Tarlac City,Tarlac,Central Luzon (Region III),Luzon,26.0,68.0,29.0,26.43,79.58,Normal / Safe,573.65,91,2026-08-21T19:48:28.864013
+Olongapo City,Zambales,Central Luzon (Region III),Luzon,26.0,48.0,29.0,25.91,78.64,Normal / Safe,545.05,89,2026-08-21T19:48:31.052605
+City of Manila,Metro Manila,National Capital Region (NCR),Luzon,29.0,81.0,32.0,34.96,94.93,Extreme Caution,1042.8,75,2026-08-21T19:48:32.652565
+Quezon City,Metro Manila,National Capital Region (NCR),Luzon,27.0,80.0,27.0,29.74,85.53,Caution,755.7,55,2026-08-21T19:48:35.064098
+Makati City,Metro Manila,National Capital Region (NCR),Luzon,30.0,78.0,32.0,37.11,98.79,Extreme Caution,1155.0,75,2026-08-21T19:48:37.308753
+Taguig City (BGC),Metro Manila,National Capital Region (NCR),Luzon,28.0,81.0,30.0,32.25,90.06,Caution,893.75,25,2026-08-21T19:48:39.252393
+Pasig City,Metro Manila,National Capital Region (NCR),Luzon,30.0,75.0,30.0,36.3,97.34,Extreme Caution,1116.5,21,2026-08-21T19:48:41.264053
+Caloocan City,Metro Manila,National Capital Region (NCR),Luzon,29.0,88.0,32.0,36.68,98.02,Extreme Caution,1137.4,87,2026-08-21T19:48:43.260013
+Parañaque City,Metro Manila,National Capital Region (NCR),Luzon,27.0,80.0,27.0,29.74,85.53,Caution,755.7,55,2026-08-21T19:48:45.373709
+Pasay City,Metro Manila,National Capital Region (NCR),Luzon,28.0,81.0,30.0,32.25,90.06,Caution,893.75,25,2026-08-21T19:48:47.338763
+Antipolo City,Rizal,CALABARZON (Region IV-A),Luzon,23.0,58.0,38.0,22.87,73.17,Normal / Safe,440.0,19,2026-08-21T19:48:49.390435
+Calamba City,Laguna,CALABARZON (Region IV-A),Luzon,22.0,94.0,42.0,22.71,72.88,Normal / Safe,440.0,55,2026-08-21T19:48:51.527546
+Santa Rosa City,Laguna,CALABARZON (Region IV-A),Luzon,22.0,94.0,41.0,22.71,72.88,Normal / Safe,440.0,25,2026-08-21T19:48:53.598505
+Batangas City,Batangas,CALABARZON (Region IV-A),Luzon,29.0,83.0,31.0,35.41,95.73,Extreme Caution,1067.55,25,2026-08-21T19:48:55.809926
+Lipa City,Batangas,CALABARZON (Region IV-A),Luzon,19.0,96.0,17.0,19.46,67.03,Normal / Safe,440.0,68,2026-08-21T19:48:57.925355
+Tagaytay City,Cavite,CALABARZON (Region IV-A),Luzon,28.0,77.0,29.0,31.65,88.96,Caution,860.75,20,2026-08-21T19:49:00.202063
+Dasmariñas City,Cavite,CALABARZON (Region IV-A),Luzon,27.0,80.0,28.0,29.74,85.53,Caution,755.7,25,2026-08-21T19:49:02.333817
+Lucena City,Quezon,CALABARZON (Region IV-A),Luzon,24.0,94.0,41.0,24.91,76.84,Normal / Safe,490.05,97,2026-08-21T19:49:04.592007
+Baguio City,Benguet,Cordillera Administrative Region (CAR),Luzon,28.0,81.0,32.0,32.25,90.06,Caution,893.75,25,2026-08-21T19:49:06.783713
+Laoag City,Ilocos Norte,Ilocos Region (Region I),Luzon,26.0,88.0,27.0,26.95,80.52,Normal / Safe,602.25,25,2026-08-21T19:49:08.920272
+Vigan City,Ilocos Sur,Ilocos Region (Region I),Luzon,21.5,95.0,17.0,22.19,71.94,Normal / Safe,440.0,25,2026-08-21T19:49:11.056450
+Dagupan City,Pangasinan,Ilocos Region (Region I),Luzon,30.0,77.0,29.0,36.83,98.3,Extreme Caution,1145.65,96,2026-08-21T19:49:13.268995
+Tuguegarao City,Cagayan,Cagayan Valley (Region II),Luzon,28.0,83.0,31.0,32.57,90.63,Caution,911.35,17,2026-08-21T19:49:15.319485
+Legazpi City,Albay,Bicol Region (Region V),Luzon,5.7,85.0,19.0,4.54,40.18,Normal / Safe,440.0,55,2026-08-21T19:49:17.561128
+Naga City,Camarines Sur,Bicol Region (Region V),Luzon,14.0,81.0,33.0,13.57,56.43,Normal / Safe,440.0,8,2026-08-21T19:49:19.845914
+Puerto Princesa City,Palawan,MIMAROPA (Region IV-B),Luzon,27.0,86.0,29.0,30.4,86.71,Caution,792.0,15,2026-08-21T19:49:21.850061
+Cebu City,Cebu,Central Visayas (Region VII),Visayas,29.0,80.0,31.0,34.74,94.53,Extreme Caution,1030.7,22,2026-08-21T19:49:23.360045
+Mandaue City,Cebu,Central Visayas (Region VII),Visayas,26.0,84.0,24.0,26.85,80.33,Normal / Safe,596.75,90,2026-08-21T19:49:25.454283
+Iloilo City,Iloilo,Western Visayas (Region VI),Visayas,29.0,78.0,33.0,34.31,93.76,Extreme Caution,1007.05,25,2026-08-21T19:49:27.717118
+Bacolod City,Negros Occidental,Negros Island Region,Visayas,27.0,80.0,27.0,29.74,85.53,Caution,755.7,55,2026-08-21T19:49:29.838247
+Dumaguete City,Negros Oriental,Negros Island Region,Visayas,2.6,25.0,22.0,-0.43,31.22,Normal / Safe,440.0,0,2026-08-21T19:49:31.884168
+Tacloban City,Leyte,Eastern Visayas (Region VIII),Visayas,20.9,87.0,24.0,21.32,70.37,Normal / Safe,440.0,55,2026-08-21T19:49:33.930758
+Tagbilaran City,Bohol,Central Visayas (Region VII),Visayas,25.0,80.0,23.0,25.64,78.16,Normal / Safe,530.2,25,2026-08-21T19:49:35.941926
+Roxas City,Capiz,Western Visayas (Region VI),Visayas,3.1,61.0,11.0,1.06,33.91,Normal / Safe,440.0,25,2026-08-21T19:49:37.937027
+Davao City,Davao del Sur,Davao Region (Region XI),Mindanao,27.0,81.0,28.0,29.83,85.7,Caution,760.65,65,2026-08-21T19:49:39.872931
+Cagayan de Oro City,Misamis Oriental,Northern Mindanao (Region X),Mindanao,27.0,65.0,29.0,28.45,83.22,Caution,684.75,81,2026-08-21T19:49:42.018828
+Zamboanga City,Zamboanga del Sur,Zamboanga Peninsula (Region IX),Mindanao,27.0,38.0,28.0,26.77,80.18,Normal / Safe,592.35,92,2026-08-21T19:49:44.161834
+General Santos City,South Cotabato,SOCCSKSARGEN (Region XII),Mindanao,29.0,81.0,32.0,34.96,94.93,Extreme Caution,1042.8,16,2026-08-21T19:49:46.133084
+Butuan City,Agusan del Norte,Caraga (Region XIII),Mindanao,13.1,100.0,25.0,13.08,55.54,Normal / Safe,440.0,0,2026-08-21T19:49:48.169846
+Iligan City,Lanao del Norte,Northern Mindanao (Region X),Mindanao,25.0,61.0,27.0,25.15,77.27,Normal / Safe,503.25,85,2026-08-21T19:49:50.427819
+Cotabato City,Maguindanao del Norte,BARMM,Mindanao,31.0,73.0,33.0,38.53,101.35,Extreme Caution,1155.0,25,2026-08-21T19:49:52.819913
